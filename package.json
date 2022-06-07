@@ -2,9 +2,10 @@
   "name": "just_stream_it",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "scripts/index.js",
   "scripts": {
-    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed"
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/rducrot/just_stream_it/issues"
   },
-  "homepage": "https://github.com/rducrot/just_stream_it#readme"
+  "homepage": "https://github.com/rducrot/just_stream_it#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-loader": "^8.2.5",
+    "babel-polyfill": "^6.26.0",
+    "sass": "^1.52.2",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2"
+  }
 }

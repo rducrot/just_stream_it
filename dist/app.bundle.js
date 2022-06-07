@@ -1,0 +1,1 @@
+(()=>{"use strict";let t=document.getElementById("best-movie"),e=document.createElement("p");e.textContent="Star Wars",t.appendChild(e);let o="";fetch("http://localhost:8000/api/v1/titles/?format=json&sort_by=-imdb_score").then((function(t){o=t})),console.log(o)})();
