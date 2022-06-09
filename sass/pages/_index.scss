@@ -1,0 +1,21 @@
+.best-movie{
+    margin: auto;
+    background: darken($primary-color, 5);
+    display: flex;
+    &__img{
+        margin: 1em;
+    }
+    &__play-button{
+        background: $secondary-color;
+        border: 1px solid $secondary-color;
+        &:hover{
+            background: lighten($secondary-color, 10);
+        }
+        &:active{
+            background: darken($secondary-color, 10);
+        }
+    }
+    &__title{
+        margin: 1em;
+    }
+}
