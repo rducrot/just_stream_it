@@ -1,13 +1,18 @@
 .best-movie{
-    margin: auto;
-    background: darken($primary-color, 5);
+    border: 1px solid $secondary-color;
+    border-radius: 1em;
+    margin: 1em auto;
+    width: 50%;
     display: flex;
-    &__img{
-        margin: 1em;
+    justify-content: center;
+    &__content{
+        align-self: center;
+        text-align: center;
     }
     &__play-button{
         background: $secondary-color;
         border: 1px solid $secondary-color;
+        padding: 0.5em 1em;
         &:hover{
             background: lighten($secondary-color, 10);
         }
@@ -18,4 +23,16 @@
     &__title{
         margin: 1em;
     }
+    &__img{
+        margin: 1em;
+    }
+}
+
+.category{
+    border: 1px solid $secondary-color;
+    border-radius: 1em;
+    margin: 1em auto;
+    padding: 1em;
+    text-align: center;
+    width: fit-content;
 }
