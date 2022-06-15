@@ -1,4 +1,5 @@
 const path = require('path');
+const { experiments } = require('webpack');
 
 module.exports = {
   mode: "production",
@@ -22,6 +23,9 @@ module.exports = {
         }
       }
     ]
+  },
+  experiments: {
+    topLevelAwait: true
   }
 };
 
