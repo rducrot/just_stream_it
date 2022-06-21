@@ -1,34 +1,12 @@
-function createModal(movieId){
-  let modal = document.getElementById("modal");
-  let modalContent = document.getElementById("modal-content");
-  fetch(`http://localhost:8000/api/v1/titles/${movieId}`)
-    .then(res => res.json())
-    .then(data => {
-  modalContent.innerHTML = `
-  <img class="movie__img" src=${data.image_url}></img>
-  <div>
-    <p>Titre : ${data.title}</p>
-    <p>Genre(s) : ${data.genres}</p>
-    <p>Date de publication : ${data.date_published}</p>
-    <p>Score : ${data.rated}</p>
-    <p>Score Imbd : ${data.imdb_score}</p>
-    <p>Directeur(s) : ${data.directors}</p>
-    <p>Acteurs : ${data.actors}</p>
-    <p>Durée : ${data.duration} minutes</p>
-    <p>Pays : ${data.countries}</p>
-    <p>Box office mondial : ${data.worldwide_gross_income}</p>
-    <p>Description : ${data.description}</p>
-  </dev>`;
-  modal.style.display = "block";
-    })
-}
+import { NUMBER_OF_MOVIES_SHOWN, CATEGORY_URL } from "./constants";
+import { createModal } from "./modal";
 
 /**
- * Add a movie to a movies container.
+ * Add a single movie to a movies container.
  * @param {HTMLElement} container The container in which the movie is displayed
  * @param {object} movie 
  */
-export function addMovie(container, movie) {
+export function getMovie(container, movie) {
     let movieContainer = document.createElement("div");
     movieContainer.classList.add("movie");
     movieContainer.id = movie.id;
@@ -54,14 +32,56 @@ export function addMovie(container, movie) {
     movieContainer.appendChild(movieOverlay);
     container.appendChild(movieContainer);
   }
+
+  /**
+   * Get a list of movies and display it in a movies container.
+   * @param {string} url 
+   * @param {HTMLHtmlElement} categoryContainer 
+   */
+  function getMovies(url, categoryContainer){
+    let moviesContainer = categoryContainer.getElementsByClassName("movies-container")[0];
+    let leftButton = categoryContainer.getElementsByClassName("left-button")[0];
+    let rightButton = categoryContainer.getElementsByClassName("right-button")[0];
+
+    let moviesInContainer = 0;
+  
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        for (let movie of data.results) {
+          getMovie(moviesContainer, movie);
+          moviesInContainer += 1;
+        }
+        if (data.previous){
+          leftButton.onclick = function(){
+            updateMovies(data.previous, categoryContainer);
+          };
+        }
+        if (data.next){
+          rightButton.onclick = function(){
+            updateMovies(data.next, categoryContainer);
+          }
+          fetch(data.next)
+            .then(res => res.json())
+            .then(data => {
+              for (let movie of data.results) {
+                if (moviesInContainer < NUMBER_OF_MOVIES_SHOWN) {
+                getMovie(moviesContainer, movie);
+                moviesInContainer += 1;
+                }
+              }
+            })
+        }
+      })
+  }
   
   /**
-   * Create a movies container.
+   * Create a movies category container.
    * @param {string} category The name of the fetched category
    * @param {string} categoryName The name displayed for the category
    * @param {HTMLElement} categoriesContainer The categories container
    */
-export function addMovieCategory(category, categoryName, categoriesContainer) {
+export function createMovieCategory(category, categoryName, categoriesContainer) {
     let categoryContainer = document.createElement("div");
     categoryContainer.classList.add("category");
   
@@ -72,9 +92,12 @@ export function addMovieCategory(category, categoryName, categoriesContainer) {
     let moviesContainer = document.createElement("div");
     moviesContainer.classList.add("movies-container");
 
-    let leftButton = document.createElement("a");
+    let leftButton = document.createElement("button");
+    leftButton.classList.add("left-button", "button");
     leftButton.textContent = "<";
-    let rightButton = document.createElement("a");
+
+    let rightButton = document.createElement("button");
+    rightButton.classList.add("right-button", "button");
     rightButton.textContent = ">";
   
     categoryContainer.appendChild(categoryTitle);
@@ -82,33 +105,19 @@ export function addMovieCategory(category, categoryName, categoriesContainer) {
     categoryContainer.appendChild(rightButton);
     categoryContainer.appendChild(moviesContainer);
     categoriesContainer.appendChild(categoryContainer);
-
-    let moviesInContainer = 0;
   
-    fetch(`http://localhost:8000/api/v1/titles/?format=json&sort_by=-imdb_score&genre=${category}`)
-      .then(res => res.json())
-      .then(data => {
-        for (let movie of data.results) {
-          addMovie(moviesContainer, movie);
-          moviesInContainer += 1;
-        }
-        if (data.previous){
-          console.log(data.previous);
-          leftButton.href = data.previous;
-        }
-        if (data.next){
-          console.log(data.next);
-          rightButton.href = data.next;
-          fetch(data.next)
-            .then(res => res.json())
-            .then(data => {
-              for (let movie of data.results) {
-                if (moviesInContainer < 7) {
-                addMovie(moviesContainer, movie);
-                moviesInContainer += 1;
-                }
-              }
-            })
-        }
-      })
+    getMovies(CATEGORY_URL + category, categoryContainer);
   };
+
+  /**
+   * Update the movies list of a category container.
+   * @param {string} url 
+   * @param {HTMLElement} moviesContainer 
+   */
+  function updateMovies(url, categoryContainer){
+    let moviesContainer = categoryContainer.getElementsByClassName("movies-container")[0];
+    while(moviesContainer.firstChild) {
+      moviesContainer.removeChild(moviesContainer.firstChild);
+    }
+    getMovies(url, categoryContainer);
+  }
