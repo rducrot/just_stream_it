@@ -1,4 +1,4 @@
-import { NUMBER_OF_MOVIES_SHOWN, CATEGORY_URL } from "./constants";
+import { NUMBER_OF_MOVIES_SHOWN, CATEGORY_URL, BEST_CATEGORY_TITLE } from "./constants";
 import { createModal } from "./modal";
 
 /**
@@ -40,6 +40,7 @@ export function getMovie(container, movie) {
    */
   function getMovies(url, categoryContainer){
     let moviesContainer = categoryContainer.getElementsByClassName("movies-container")[0];
+    let categoryTitle = categoryContainer.getElementsByClassName("category__title")[0];
     let leftButton = categoryContainer.getElementsByClassName("left-button")[0];
     let rightButton = categoryContainer.getElementsByClassName("right-button")[0];
 
@@ -55,7 +56,12 @@ export function getMovie(container, movie) {
         if (data.previous){
           leftButton.onclick = function(){
             updateMovies(data.previous, categoryContainer);
-          };
+          } 
+        }
+        /* Remove the first movie if the category is Best Movie */
+        if (!data.previous && categoryTitle.textContent == BEST_CATEGORY_TITLE){
+          moviesContainer.removeChild(moviesContainer.firstChild);
+          moviesInContainer -= 1;
         }
         if (data.next){
           rightButton.onclick = function(){

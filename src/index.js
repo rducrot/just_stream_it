@@ -7,6 +7,7 @@ let categoriesContainer = document.getElementById("categories");
 getBestMovie();
 
 for (let i in MOVIES_CATEGORIES) {
+  console.log(i + " " + MOVIES_CATEGORIES[i]);
   createMovieCategory(i, MOVIES_CATEGORIES[i], categoriesContainer);
 };
 
