@@ -1,7 +1,4 @@
-import {
-  NUMBER_OF_MOVIES_PER_CATEGORIE,
-  NUMBER_OF_MOVIES_CATEGORIES
-} from "./constants";
+import {NUMBER_OF_MOVIES_PER_CATEGORIE, NUMBER_OF_MOVIES_CATEGORIES} from "./constants";
 
 /**
 * Fetch movies categories from an URL and append a movies categories list.
@@ -9,16 +6,18 @@ import {
 * @param {string[]} categoriesList 
 */
 async function fetchCategories(url, categoriesList) {
-  fetch(url)
-    .then(res => res.json())
-    .then(function (data) {
-      for (let category of data.results) {
-        categoriesList.push(category.name);
-      }
-      if (data.next != null) {
-        fetchCategories(data.next, categoriesList);
-      }
-    })
+
+  let categories = []
+  let results = await fetch(url);
+
+  for(let category of results.results) {
+    categoriesList.push(category);
+  }
+
+  if (results.next){
+    fetchCategories(results.next, categoriesList);
+  }
+  return categoriesList;
 }
 
 /**
@@ -27,18 +26,15 @@ async function fetchCategories(url, categoriesList) {
  * @returns {Promise<object[]>} A list of categories
  */
 export async function createCategoriesList(url) {
-  let categoriesList = []
-  fetchCategories(url, categoriesList);
-  return categoriesList;
+  let categoriesList = await fetch(url);
 }
 
 /**
- * 
- * @param {*} url 
- * @returns 
+ * Select random movies categories.
+ * @param {Promise<object[]>} categoriesList 
+ * @returns {<object[]>}
  */
-export async function selectRandomCategories(url) {
-  let categoriesList = await createCategoriesList(url);
+export async function selectRandomCategories(categoriesList) {
   let categoriesToShow = [];
   console.log(categoriesList.length);
   while (categoriesToShow.length < NUMBER_OF_MOVIES_CATEGORIES) {
@@ -75,6 +71,6 @@ async function fetchMovies(url, moviesList) {
  */
 export async function createMoviesList(url) {
   let moviesList = []
-  fetchMovies(url, moviesList);
+  await fetchMovies(url, moviesList);
   return moviesList;
 }

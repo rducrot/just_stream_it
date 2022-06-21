@@ -10,10 +10,18 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
     &__content{
+        display:flex;
+        color: black;
         background-color: #fefefe;
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
+        img {
+            width: fit-content;
+            height: fit-content;
+            align-self: center;
+            margin-right: 2em;
+        }
     }
 }
