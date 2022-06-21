@@ -1,3 +1,5 @@
+import { MOVIE_URL } from "./constants";
+
 /**
  * Create a modal with the informations of the selected movie.
  * @param {number} movieId 
@@ -5,7 +7,7 @@
  export function createModal(movieId){
     let modal = document.getElementById("modal");
     let modalContent = document.getElementById("modal-content");
-    fetch(`http://localhost:8000/api/v1/titles/${movieId}`)
+    fetch(MOVIE_URL + movieId)
       .then(res => res.json())
       .then(data => {
     modalContent.innerHTML = `
