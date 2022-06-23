@@ -14,6 +14,10 @@ export function getMovie(container, movie) {
     let movieImg = document.createElement("img");
     movieImg.classList.add(constants.CLASS_MOVIE_IMG);
     movieImg.src = movie.image_url;
+    /* Define a default img if there is an error */
+    movieImg.onerror = function(){
+      movieImg.src = constants.DEFAULT_MOVIE_IMG;
+    };
     movieImg.alt = movie.title;
   
     let movieOverlay = document.createElement("div");

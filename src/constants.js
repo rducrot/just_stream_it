@@ -1,12 +1,12 @@
 /* SETTINGS */
 export const NUMBER_OF_MOVIES_SHOWN = 7;
-
+export const DEFAULT_MOVIE_IMG = "public/images/default.png";
 /* URL */
-export const BASE_URL = "http://localhost:8000";
+export const BASE_API_URL = "http://localhost:8000";
 
-export const BEST_SCORE_URL = BASE_URL + "/api/v1/titles/?format=json&sort_by=-imdb_score";
-export const CATEGORY_URL = BASE_URL + "/api/v1/titles/?format=json&sort_by=-imdb_score&genre=";
-export const MOVIE_URL = BASE_URL + "/api/v1/titles/";
+export const BEST_SCORE_URL = BASE_API_URL + "/api/v1/titles/?format=json&sort_by=-imdb_score";
+export const CATEGORY_URL = BASE_API_URL + "/api/v1/titles/?format=json&sort_by=-imdb_score&genre=";
+export const MOVIE_URL = BASE_API_URL + "/api/v1/titles/";
 
 /* Movies categories */
 export const BEST_CATEGORY = "";
@@ -49,4 +49,5 @@ export const RIGHT_BUTTON_CONTENT = ">";
 export const ID_CATEGORIES = "categories"
 
 export const ID_MODAL = "modal";
-export const ID_MODAL_CONTENT = "modal-content";
+export const ID_MODAL_IMG = "modal-img";
+export const ID_MODAL_TEXT = "modal-text";
