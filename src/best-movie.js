@@ -1,15 +1,16 @@
-import { MOVIE_URL } from "./constants";
+import { BEST_SCORE_URL, MOVIE_URL, CLASS_BEST_MOVIE_IMG,
+        CLASS_BEST_MOVIE_TITLE, CLASS_BEST_MOVIE_DESCRIPTION } from "./constants";
 import { getMovie } from "./movies-container";
 
 /**
  * Get the best rated movie and display it.
  */
 export async function getBestMovie() {
-    let bestMovieImage = document.getElementById("best-movie-img");
-    let bestMovieTitle = document.getElementById("best-movie-title");
-    let bestMovieDescription = document.getElementById("best-movie-description");
+    let bestMovieImage = document.getElementById(CLASS_BEST_MOVIE_IMG);
+    let bestMovieTitle = document.getElementById(CLASS_BEST_MOVIE_TITLE);
+    let bestMovieDescription = document.getElementById(CLASS_BEST_MOVIE_DESCRIPTION);
 
-    fetch("http://localhost:8000/api/v1/titles/?format=json&sort_by=-imdb_score")
+    fetch(BEST_SCORE_URL)
         .then(res => res.json())
         .then(data => {
             let bestMovie = data.results[0];

@@ -1,4 +1,4 @@
-import { NUMBER_OF_MOVIES_SHOWN, CATEGORY_URL, BEST_CATEGORY_TITLE } from "./constants";
+import * as constants from "./constants";
 import { createModal } from "./modal";
 
 /**
@@ -8,19 +8,19 @@ import { createModal } from "./modal";
  */
 export function getMovie(container, movie) {
     let movieContainer = document.createElement("div");
-    movieContainer.classList.add("movie");
+    movieContainer.classList.add(constants.CLASS_MOVIE);
     movieContainer.id = movie.id;
   
     let movieImg = document.createElement("img");
-    movieImg.classList.add("movie__img");
+    movieImg.classList.add(constants.CLASS_MOVIE_IMG);
     movieImg.src = movie.image_url;
     movieImg.alt = movie.title;
   
     let movieOverlay = document.createElement("div");
-    movieOverlay.classList.add("movie__overlay");
+    movieOverlay.classList.add(constants.CLASS_MOVIE_OVERLAY);
   
     let movieTitle = document.createElement("p");
-    movieTitle.classList.add("movie__title");
+    movieTitle.classList.add(constants.CLASS_MOVIE_TITLE);
     movieTitle.textContent = movie.title;
 
     movieContainer.onclick = function() {
@@ -39,10 +39,10 @@ export function getMovie(container, movie) {
    * @param {HTMLHtmlElement} categoryContainer 
    */
   function getMovies(url, categoryContainer){
-    let moviesContainer = categoryContainer.getElementsByClassName("movies-container")[0];
-    let categoryTitle = categoryContainer.getElementsByClassName("category__title")[0];
-    let leftButton = categoryContainer.getElementsByClassName("left-button")[0];
-    let rightButton = categoryContainer.getElementsByClassName("right-button")[0];
+    let moviesContainer = categoryContainer.getElementsByClassName(constants.CLASS_MOVIES_CONTAINER)[0];
+    let categoryTitle = categoryContainer.getElementsByClassName(constants.CLASS_CATEGORY_TITLE)[0];
+    let leftButton = categoryContainer.getElementsByClassName(constants.CLASS_LEFT_BUTTON)[0];
+    let rightButton = categoryContainer.getElementsByClassName(constants.CLASS_RIGHT_BUTTON)[0];
 
     let moviesInContainer = 0;
   
@@ -59,7 +59,7 @@ export function getMovie(container, movie) {
           } 
         }
         /* Remove the first movie if the category is Best Movie */
-        if (!data.previous && categoryTitle.textContent == BEST_CATEGORY_TITLE){
+        if (!data.previous && categoryTitle.textContent == constants.BEST_CATEGORY_TITLE){
           moviesContainer.removeChild(moviesContainer.firstChild);
           moviesInContainer -= 1;
         }
@@ -71,7 +71,7 @@ export function getMovie(container, movie) {
             .then(res => res.json())
             .then(data => {
               for (let movie of data.results) {
-                if (moviesInContainer < NUMBER_OF_MOVIES_SHOWN) {
+                if (moviesInContainer < constants.NUMBER_OF_MOVIES_SHOWN) {
                 getMovie(moviesContainer, movie);
                 moviesInContainer += 1;
                 }
@@ -89,22 +89,22 @@ export function getMovie(container, movie) {
    */
 export function createMovieCategory(category, categoryName, categoriesContainer) {
     let categoryContainer = document.createElement("div");
-    categoryContainer.classList.add("category");
+    categoryContainer.classList.add(constants.CLASS_CATEGORY);
   
     let categoryTitle = document.createElement("h2");
-    categoryTitle.classList.add("category__title");
+    categoryTitle.classList.add(constants.CLASS_CATEGORY_TITLE);
     categoryTitle.textContent = categoryName
   
     let moviesContainer = document.createElement("div");
-    moviesContainer.classList.add("movies-container");
+    moviesContainer.classList.add(constants.CLASS_MOVIES_CONTAINER);
 
     let leftButton = document.createElement("button");
-    leftButton.classList.add("left-button", "button");
-    leftButton.textContent = "<";
+    leftButton.classList.add(constants.CLASS_LEFT_BUTTON, constants.CLASS_BUTTON);
+    leftButton.textContent = constants.LEFT_BUTTON_CONTENT;
 
     let rightButton = document.createElement("button");
-    rightButton.classList.add("right-button", "button");
-    rightButton.textContent = ">";
+    rightButton.classList.add(constants.CLASS_RIGHT_BUTTON, constants.CLASS_BUTTON);
+    rightButton.textContent = constants.RIGHT_BUTTON_CONTENT;
   
     categoryContainer.appendChild(categoryTitle);
     categoryContainer.appendChild(leftButton);
@@ -112,7 +112,7 @@ export function createMovieCategory(category, categoryName, categoriesContainer)
     categoryContainer.appendChild(moviesContainer);
     categoriesContainer.appendChild(categoryContainer);
   
-    getMovies(CATEGORY_URL + category, categoryContainer);
+    getMovies(constants.CATEGORY_URL + category, categoryContainer);
   };
 
   /**
@@ -121,7 +121,7 @@ export function createMovieCategory(category, categoryName, categoriesContainer)
    * @param {HTMLElement} moviesContainer 
    */
   function updateMovies(url, categoryContainer){
-    let moviesContainer = categoryContainer.getElementsByClassName("movies-container")[0];
+    let moviesContainer = categoryContainer.getElementsByClassName(constants.CLASS_MOVIES_CONTAINER)[0];
     while(moviesContainer.firstChild) {
       moviesContainer.removeChild(moviesContainer.firstChild);
     }

@@ -1,17 +1,17 @@
-import { MOVIE_URL } from "./constants";
+import { MOVIE_URL, ID_MODAL, ID_MODAL_CONTENT, CLASS_MOVIE_IMG } from "./constants";
 
 /**
  * Create a modal with the informations of the selected movie.
  * @param {number} movieId 
  */
  export function createModal(movieId){
-    let modal = document.getElementById("modal");
-    let modalContent = document.getElementById("modal-content");
+    let modal = document.getElementById(ID_MODAL);
+    let modalContent = document.getElementById(ID_MODAL_CONTENT);
     fetch(MOVIE_URL + movieId)
       .then(res => res.json())
       .then(data => {
     modalContent.innerHTML = `
-    <img class="movie__img" src=${data.image_url}></img>
+    <img class="${CLASS_MOVIE_IMG}" src=${data.image_url}></img>
     <div>
       <p>Titre : ${data.title}</p>
       <p>Genre(s) : ${data.genres}</p>

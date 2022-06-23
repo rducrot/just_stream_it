@@ -1,8 +1,8 @@
 import { getBestMovie } from "./best-movie";
 import { createMovieCategory } from "./movies-container";
-import { MOVIES_CATEGORIES } from "./constants";
+import { MOVIES_CATEGORIES, ID_CATEGORIES } from "./constants";
 
-let categoriesContainer = document.getElementById("categories");
+let categoriesContainer = document.getElementById(ID_CATEGORIES);
 
 getBestMovie();
 
