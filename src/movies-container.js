@@ -131,3 +131,4 @@ export function createMovieCategory(category, categoryName, categoriesContainer)
     }
     getMovies(url, categoryContainer);
   }
+  

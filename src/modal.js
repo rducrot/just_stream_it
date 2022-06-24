@@ -31,3 +31,4 @@ import { MOVIE_URL, ID_MODAL, ID_MODAL_IMG, ID_MODAL_TEXT, DEFAULT_MOVIE_IMG } f
         modal.style.display = "block";
       })
   }
+  
