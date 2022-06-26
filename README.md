@@ -12,6 +12,14 @@ La récupération de données se base sur l'API OCMovies. Il est nécessaire de 
 Si l'API n'est pas lancée localement, il est possible de renseigner son adresse en modifiant la constante `BASE_API_URL` du fichier `src/constants.js`.
 
 ## Développement
+Les dépendances ne servent que pour le développement, c'est pourquoi il n'est pas nécessaire de les installer pour lancer l'application.
+
+Utiliser la commande suivante depuis le répertoire de l'application pour installer les dépendances :
+
+```bash
+npm install
+```
+
 Après toute modification d'un fichier SASS :
 
 ```bash
