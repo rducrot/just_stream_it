@@ -27,8 +27,7 @@ import { MOVIE_URL, ID_MODAL, ID_MODAL_IMG, ID_MODAL_TEXT, DEFAULT_MOVIE_IMG } f
             <p>Durée : ${data.duration} minutes</p>
             <p>Pays : ${data.countries}</p>
             <p>Box office mondial : ${data.worldwide_gross_income ? data.worldwide_gross_income : "Non classé"}</p>
-            <p>Description : ${data.description}</p>;`
+            <p>Description : ${data.description}</p>`
         modal.style.display = "block";
       })
   }
-  
