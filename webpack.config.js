@@ -4,7 +4,8 @@ const { experiments } = require('webpack');
 module.exports = {
   mode: "production",
   entry: {
-    app: "./src/index.js",
+    polyfill: "babel-polyfill",
+    app: "./src/index.js"
   },
   output: {
     filename: "[name].bundle.js",

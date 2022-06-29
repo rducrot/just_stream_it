@@ -1,6 +1,7 @@
 /* SETTINGS */
 export const NUMBER_OF_MOVIES_SHOWN = 7;
 export const DEFAULT_MOVIE_IMG = "public/images/default.png";
+
 /* URL */
 export const BASE_API_URL = "http://localhost:8000";
 
