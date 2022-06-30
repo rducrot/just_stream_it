@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <title>Just Stream It</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="public/css/prefixed/style.css">
     <link rel="icon" href="public/images/logo.png" />
 </head>
@@ -18,7 +19,7 @@
 
     <div class="best-movie">
         <div class="best-movie__content">
-            <h2 class="best-movie__title" id="best-movie-title"></h2>
+            <h2 class="best-movie__title" id="best-movie-title">Title</h2>
             <button class="button">Play</button>
             <p class="best-movie__desc" id="best-movie-description"></p>
         </div>
@@ -28,12 +29,12 @@
     
     <div class="modal" id="modal">
         <div class="modal__content">
-            <img src="" alt="" id="modal-img" class="movie__img">
+            <img src="public/images/default.png" alt="" id="modal-img" class="movie__img">
             <div id="modal-text"></div>
         </div>
     </div>
-</body>
 <script src="dist/polyfill.bundle.js"></script>
 <script src="dist/app.bundle.js"></script>
+</body>
 
 </html>
